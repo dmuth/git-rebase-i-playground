@@ -9,6 +9,8 @@ DEV1="dev1"
 DEV2="dev2"
 REPO="repo.git"
 FILE="file.txt"
+BRANCH1="branch1"
+BRANCH2="branch2"
 
 echo "# "
 echo "# Cleaning up any past installs..."
@@ -52,7 +54,7 @@ do
 	git commit -m "${LINE}" > /dev/null
 done
 
-git log --pretty=oneline
+#git log --pretty=oneline # Debugging
 popd > /dev/null
 
 echo "# "
@@ -81,6 +83,53 @@ echo "# Cloning to ${DEV2}..."
 echo "# "
 
 git clone ${REPO} ${DEV2}
+
+echo "# Switching back to ${DEV1}..."
+pushd $DEV1 > /dev/null
+
+
+echo "# "
+echo "# Creating ${BRANCH1}..."
+echo "# "
+git co -b $BRANCH1
+for LINE in 10-branch1 11-branch1
+do
+	echo $LINE >> ${LINE}.txt
+	git add ${FILE} ${LINE}.txt
+	git commit -m "${LINE}" > /dev/null
+done
+
+echo "# "
+echo "# Creating ${BRANCH2} off of ${BRANCH1}..."
+echo "# "
+git co -b $BRANCH2
+for LINE in 20-branch2 21-branch2
+do
+	echo $LINE >> ${LINE}.txt
+	git add ${FILE} ${LINE}.txt
+	git commit -m "${LINE}" > /dev/null
+done
+
+echo "# "
+echo "# All done!"
+echo "# "
+echo "# The repo in ${DEV1} is currently two branches deep, and the commit log looks like this:"
+echo "# "
+git log --pretty=oneline # Debugging
+
+echo "# "
+echo "# To get started, drop into that directory with:"
+echo "# "
+echo "# cd ${DEV1}/"
+echo "# "
+echo "# Some exercises to try with git rebase -i:  "
+echo "# "
+echo "# - Switch the order of commits 07-seventh and 08-eigth"
+echo "# - Switch the order of commits 03-third-will-conflict and 04-fourth-will-conflict"
+echo "# - Merge the changes of ${BRANCH2} into master but NOT the changes of ${BRANCH1}"
+echo "# "
+
+
 
 
 
