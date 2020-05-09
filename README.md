@@ -100,6 +100,28 @@ Solutions to the above exercises:
    - `git push origin master`
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, merge to `master`, THEN push to `origin`
+   - Start with `git rebase -i HEAD~11`, switch the lines with those two commits, then save the file.
+   - Edit `file.txt` and resolve the conflicts
+   - `git add file.txt`
+      - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
+   - `git commit`
+   - Running `git status` tells you that you're not done yet, and tells you what to do next:
+   - `git rebase --continue`
+   - Uh oh, we have another conflict because the next commit also changes `file.txt`.
+   - Edit `file.txt` and resolve the conflicts
+   - `git add file.txt`
+   - `git commit`
+   - `git rebase --continue`
+   - `git checkout master`
+   - `git merge branch2`
+   - At this point, you've now merged your changes into master, let's push them with `git push origin`.
+   - That's it, you're done!
+   - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
+
+
+
+If the commit history for any of the above look "weird" when you're done, that's because you're rewriting history, so yeah.  The tool <a href="https://github.com/jonas/tig">tig</a> can make the history a little
+clearer to read.
 
 
 ## Additional Resources
