@@ -1,0 +1,10 @@
+
+# Vim
+*~
+*.swp
+
+# Ignore our repos
+dev1/
+dev2/
+repo.git/
+
