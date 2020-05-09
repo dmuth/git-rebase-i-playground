@@ -66,6 +66,12 @@ Here are some hints to lead you in the right direction but without
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
 
 
+## Additional Resources
+
+- https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history
+- https://git-scm.com/docs/git-rebase
+- https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+- https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase
 
 
 ## Contact
