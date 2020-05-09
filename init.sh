@@ -29,12 +29,24 @@ git add $FILE
 git commit -m "Initial checkin" 
 
 #
-# Create 9 more lines and lines in the text file, and a checkin for each.
-# This guarantees rebasing will produce a conflict.
+# Add 4 checkins of a new file and a line in the text file.
+# This guarantees a conflict when rebasing any of these commits.
 #
-for LINE in 01-first 02-second 03-third 04-fourth 05-fifth 06-sixth 07-seventh 08-eighth 09-ninth
+for LINE in 01-first 02-second 03-third 04-fourth 
 do
+	LINE="${LINE}-will-conflict"
 	echo $LINE >> $FILE
+	echo $LINE >> ${LINE}.txt
+	git add ${FILE} ${LINE}.txt
+	git commit -m "${LINE}" > /dev/null
+done
+
+
+#
+# Create 5 more checkins that *won't* cause conflicts.
+#
+for LINE in 05-fifth 06-sixth 07-seventh 08-eighth 09-ninth
+do
 	echo $LINE >> ${LINE}.txt
 	git add ${FILE} ${LINE}.txt
 	git commit -m "${LINE}" > /dev/null
