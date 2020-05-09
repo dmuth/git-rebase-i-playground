@@ -96,8 +96,9 @@ Solutions to the above exercises:
    - Start with `git rebase -i HEAD~10`, switch the lines with those two commits, then save the file.
    - `git checkout master`
    - `git merge branch2`
+      - `git log --pretty=online` will show TWO commits with a log message of `09-ninth`, one of which is on `origin/master`.  This is fine, as history has been rewritten.  In fact, the merge from `branch2` takes this into account.
    - `git push origin master`
-   - Verify by changing into `../repo.git` and running `git log git log --pretty=oneline`
+   - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, merge to `master`, THEN push to `origin`
 
 
