@@ -24,12 +24,14 @@ NOTE: Running `init.sh` will remove those directories if they already exist.  Th
 
 ## Why would you want to use `git rebase -i`?
 
-Running `git rebase -i &lt;commit_id&gt;` will bring up recent commits in the system editor and allow
+Running `git rebase -i commit_id` will bring up recent commits in the system editor and allow
 you to reorder the commits, edit the commit message, or even delete commits.
 
-Why would you want to delete a commit?  Sometimes you realize several changes after a commit that you
-didn't want to make that change.  Or perhaps you made a feature branch based on another branch, and want
-to deploy the changes from that feature branch but not the branch it's based on. (Happened to me, once)
+Why would you want to delete a commit?  Probably the most common reason is that you made many commits
+to a feature branch that you would like to squash into a single commit. 
+Or perhaps you made a feature branch based on another branch, and want to deploy the changes 
+from that feature branch but not the branch it's based on. (Happened to me once!)
+
 
 ### Any caveats?
 
@@ -46,13 +48,14 @@ Once that you have the repos set up, here are some sample exercises to try (answ
 - Switch the order of commits `07-seventh` and `08-eight`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
+- Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
 
 
-# Hints
+## Hints
 
-Here are some hints to lead you in the right direction but without
+Here are some hints to lead you in the right direction but without fully giving away the solution
 
 - Switch the order of commits `07-seventh` and `08-eight`
    - *Make sure you are going far enough back in the revision history...*
@@ -60,8 +63,10 @@ Here are some hints to lead you in the right direction but without
    - *You're going to have to resolve that merge conflict...*
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - *You'll need to remove some commits...*
-- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
+- Squash the two commits in `branch1` then push to `origin`
    - *You'll need to overwrite what's already there...*
+- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
+   - *There's more than one way to do this*
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
 
@@ -70,14 +75,14 @@ Here are some hints to lead you in the right direction but without
 
 If things go wrong, here are some suggestions:
 
-- Running `git status` at any time will not harm you, and will provide you with some useful info.
+- Running `git status` at any time will not harm you, and will provide you with some useful info and what you need to do next.
 - `git rebase --abort` will back out of the current rebase.
 - The `tig` tool available at https://github.com/jonas/tig is super useful for browsing the commit history of a branch
 
 
 ## Solutions
 
-Solutions to the above exercises:
+Solutions to the above exercises, all done in the `dev1/` directory:
 
 - Switch the order of commits `07-seventh` and `08-eight`
    - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file. You're done!
@@ -103,11 +108,19 @@ Solutions to the above exercises:
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
 
+- Squash the two commits in `branch1` then push to `origin`
+   - Check out the branch: `git checkout branch1`
+   - Rebase the branch and squash the final commit into the previous one, so `branch1` only has one commit.
+   - Push with `git push --force`
+   - Verify by changing into `../repo.git` and running `git log --pretty=oneline branch1`
+
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
    - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
-   - `git merge branch2`
-      - `git log --pretty=online` will show TWO commits with a log message of `09-ninth`, one of which is on `origin/master`.  This is fine, as history has been rewritten.  In fact, the merge from `branch2` takes this into account.
-   - `git push origin master`
+   - There are two ways to do this:
+      - `git pull && git push`
+         - This is the preferred way, and will cause your (re-written) history to be merged in with what's in `origin`.
+      - `git push --force`
+         - This will overwrite what's in `origin` and is only recommended if you are in a branch that only you work on.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`

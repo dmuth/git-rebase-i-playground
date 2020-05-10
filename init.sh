@@ -97,6 +97,7 @@ do
 	echo $LINE >> ${LINE}.txt
 	git add ${FILE} ${LINE}.txt
 	git commit -m "${LINE}" > /dev/null
+	git push --set-upstream origin branch1
 done
 
 echo "# "
