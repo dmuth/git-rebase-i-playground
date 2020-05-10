@@ -91,7 +91,7 @@ pushd $DEV1 > /dev/null
 echo "# "
 echo "# Creating ${BRANCH1}..."
 echo "# "
-git co -b $BRANCH1
+git checkout -b $BRANCH1
 for LINE in 10-branch1 11-branch1
 do
 	echo $LINE >> ${LINE}.txt
@@ -102,7 +102,7 @@ done
 echo "# "
 echo "# Creating ${BRANCH2} off of ${BRANCH1}..."
 echo "# "
-git co -b $BRANCH2
+git checkout -b $BRANCH2
 for LINE in 20-branch2 21-branch2
 do
 	echo $LINE >> ${LINE}.txt
@@ -110,7 +110,7 @@ do
 	git commit -m "${LINE}" > /dev/null
 done
 
-git co master
+git checkout master
 
 echo "# "
 echo "# All done!"
