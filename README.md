@@ -9,7 +9,7 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 
 ## Getting Started
 
-- Clone this repo: `git@github.com:dmuth/git-rebase-i-playground.git`
+- Clone this repo: `git clone git@github.com:dmuth/git-rebase-i-playground.git`
 - `cd git-rebase-i-playground`
 - `./init.sh`
 
