@@ -148,7 +148,7 @@ clearer to read.
 
 ### Q: What's the story with Alice and Bob?
 
-A: Alice and Bob are used as placeholder names in cryptology, science, and engineering literature: https://en.wikipedia.org/wiki/Alice_and_Bob  I find using the names a useful because then I don't have to focus on the underlying details _quite_ as much.
+A: Alice and Bob are used as placeholder names in cryptology, science, and engineering literature: https://en.wikipedia.org/wiki/Alice_and_Bob  I find using the names to be useful because then I don't have to focus on the underlying details _quite_ as much.
 
 
 ## Additional Resources
