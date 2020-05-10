@@ -110,13 +110,17 @@ do
 	git commit -m "${LINE}" > /dev/null
 done
 
+git co master
+
 echo "# "
 echo "# All done!"
 echo "# "
-echo "# The repo in ${DEV1} is currently two branches deep, and the commit log looks like this:"
+echo "# The repo in ${DEV1} is currently two branches deep, and the commit log for master looks like this:"
 echo "# "
 git log --pretty=oneline # Debugging
 
+echo "# "
+echo "# Don't forget about branch1 and branch2!"
 echo "# "
 echo "# To get started, drop into that directory with:"
 echo "# "
