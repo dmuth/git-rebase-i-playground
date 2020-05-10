@@ -157,6 +157,7 @@ A: Alice and Bob are used as placeholder names in cryptology, science, and engin
 - https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history
 - https://git-scm.com/docs/git-rebase
 - https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+- https://www.dmuth.org/howto-safely-use-git-rebase-i/ - My blog post on this topic
 
 
 ## Contact
