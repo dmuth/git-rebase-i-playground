@@ -13,7 +13,7 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 - `cd git-rebase-i-playground`
 - `./init.sh`
 
-This will create the following directories:
+This will create the following repo and directories, each with about a dozen commits:
 - `dev-alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from master while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
    - `branch2` will be the current branch checked out.
 - `dev-bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `master`.
