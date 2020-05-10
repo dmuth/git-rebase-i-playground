@@ -111,7 +111,7 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
 - Squash the two commits in `branch1` then push to `origin`
    - Check out the branch: `git checkout branch1`
    - Rebase the branch and squash the final commit into the previous one, so `branch1` only has one commit.
-   - Push with `git push --force`
+   - Push with `git push --force-with-lease`
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline branch1`
 
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
@@ -119,8 +119,9 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - There are two ways to do this:
       - `git pull && git push`
          - This is the preferred way, and will cause your (re-written) history to be merged in with what's in `origin`.
-      - `git push --force`
+      - `git push --force-with-lease`
          - This will overwrite what's in `origin` and is only recommended if you are in a branch that only you work on.
+         - The difference between `--force-with-lease` versus `--force` is that the latter will overwrite the remote with your changes.  `--force-with-lease` requires that you have the most recent commit (the HEAD) from the remote, to ensure that you don't overwrite changes which were checked in since your last `pull`.  This makes it safer, or at least less unsafe.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
