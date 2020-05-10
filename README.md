@@ -46,9 +46,8 @@ Once that you have the repos set up, here are some sample exercises to try (answ
 - Switch the order of commits `07-seventh` and `08-eight`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
-- Switch the order of commits `07-seventh and 08-eight`, merge to `master`, THEN push to `origin`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, merge to `master`, THEN push to `origin`
+- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
 
 
 # Hints
@@ -61,10 +60,19 @@ Here are some hints to lead you in the right direction but without
    - *You're going to have to resolve that merge conflict...*
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - *You'll need to remove some commits...*
-- Switch the order of commits `07-seventh and 08-eight`, merge to `master`, THEN push to `origin`
+- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
    - *You'll need to overwrite what's already there...*
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, merge to `master`, THEN push to `origin`
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
+
+
+## Troubleshooting
+
+If things go wrong, here are some suggestions:
+
+- Running `git status` at any time will not harm you, and will provide you with some useful info.
+- `git rebase --abort` will back out of the current rebase.
+- The `tig` tool available at https://github.com/jonas/tig is super useful for browsing the commit history of a branch
 
 
 ## Solutions
@@ -72,9 +80,10 @@ Here are some hints to lead you in the right direction but without
 Solutions to the above exercises:
 
 - Switch the order of commits `07-seventh` and `08-eight`
-   - Start with `git rebase -i HEAD~10`, switch the lines with those two commits, then save the file. You're done!
+   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file. You're done!
+
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict` in the `master` branch
-   - Start with `git rebase -i HEAD~11`, switch the lines with those two commits, then save the file.
+   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
    - Edit `file.txt` and resolve the conflicts
    - `git add file.txt`
       - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
@@ -87,20 +96,22 @@ Solutions to the above exercises:
    - `git commit`
    - `git rebase --continue`
    - No more conflicts, so that's it, you're done! Verify with `git log`.
+
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - Start with `git rebase -i HEAD~11`, remove the two commits from `branch1`, save the file
    - `git checkout master`
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
-- Switch the order of commits `07-seventh and 08-eight`, merge to `master`, THEN push to `origin`
-   - Start with `git rebase -i HEAD~10`, switch the lines with those two commits, then save the file.
-   - `git checkout master`
+
+- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
+   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
    - `git merge branch2`
       - `git log --pretty=online` will show TWO commits with a log message of `09-ninth`, one of which is on `origin/master`.  This is fine, as history has been rewritten.  In fact, the merge from `branch2` takes this into account.
    - `git push origin master`
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, merge to `master`, THEN push to `origin`
-   - Start with `git rebase -i HEAD~11`, switch the lines with those two commits, then save the file.
+
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
+   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
    - Edit `file.txt` and resolve the conflicts
    - `git add file.txt`
       - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
@@ -112,13 +123,9 @@ Solutions to the above exercises:
    - `git add file.txt`
    - `git commit`
    - `git rebase --continue`
-   - `git checkout master`
-   - `git merge branch2`
    - At this point, you've now merged your changes into master, let's push them with `git push origin`.
    - That's it, you're done!
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
-
-
 
 If the commit history for any of the above look "weird" when you're done, that's because you're rewriting history, so yeah.  The tool <a href="https://github.com/jonas/tig">tig</a> can make the history a little
 clearer to read.
