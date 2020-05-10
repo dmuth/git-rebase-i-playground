@@ -14,9 +14,9 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 - `./init.sh`
 
 This will create the following directories:
-- `dev1` - A clone of the repo, with two branches: `branch1` and `branch2`.  `branch1` is a branch from master while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
+- `dev-alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from master while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
    - `branch2` will be the current branch checked out.
-- `dev2`- A clone of the repo, only containing `master`.
+- `dev-bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `master`.
 - `repo.git` - A "bare" clone of the repo.  Note that if you `cd` to this directory, commands like `git log --pretty=oneline` will work just fine. That is useful for debugging.
 
 NOTE: Running `init.sh` will remove those directories if they already exist.  This is so that you can have a "clean slate" every time you run the script.
@@ -50,7 +50,7 @@ Once that you have the repos set up, here are some sample exercises to try (answ
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
 - Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
 
 
 ## Hints
@@ -67,7 +67,7 @@ Here are some hints to lead you in the right direction but without fully giving 
    - *You'll need to overwrite what's already there...*
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
    - *There's more than one way to do this*
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
 
 
@@ -82,7 +82,7 @@ If things go wrong, here are some suggestions:
 
 ## Solutions
 
-Solutions to the above exercises, all done in the `dev1/` directory:
+Solutions to the above exercises, all done in the `dev-alice/` directory:
 
 - Switch the order of commits `07-seventh` and `08-eight`
    - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file. You're done!
@@ -123,7 +123,7 @@ Solutions to the above exercises, all done in the `dev1/` directory:
          - This will overwrite what's in `origin` and is only recommended if you are in a branch that only you work on.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, push to `origin`
+- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
    - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
    - Edit `file.txt` and resolve the conflicts
    - `git add file.txt`
@@ -142,6 +142,13 @@ Solutions to the above exercises, all done in the `dev1/` directory:
 
 If the commit history for any of the above look "weird" when you're done, that's because you're rewriting history, so yeah.  The tool <a href="https://github.com/jonas/tig">tig</a> can make the history a little
 clearer to read.
+
+
+## FAQ
+
+### Q: What's the story with Alice and Bob?
+
+A: Alice and Bob are used as placeholder names in cryptology, science, and engineering literature: https://en.wikipedia.org/wiki/Alice_and_Bob  I find using the names a useful because then I don't have to focus on the underlying details _quite_ as much.
 
 
 ## Additional Resources

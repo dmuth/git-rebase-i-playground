@@ -5,8 +5,8 @@
 
 set -e
 
-DEV1="dev1"
-DEV2="dev2"
+DEV1="dev-alice"
+DEV2="dev-bob"
 REPO="repo.git"
 FILE="file.txt"
 BRANCH1="branch1"
@@ -132,6 +132,7 @@ echo "# "
 echo "# - Switch the order of commits 07-seventh and 08-eight"
 echo "# - Switch the order of commits 03-third-will-conflict and 04-fourth-will-conflict"
 echo "# - Merge the changes of ${BRANCH2} into master but NOT the changes of ${BRANCH1}"
+echo "# - Squash the two commits in `branch1` then push to `origin`"
 echo "# - Switch the order of commits 07-seventh and 08-eight, THEN push to origin"
 echo "# - Switch the order of commits 03-third-will-conflict and 04-fourth-will-conflict, THEN push to origin"
 echo "# "

@@ -4,7 +4,7 @@
 *.swp
 
 # Ignore our repos
-dev1/
-dev2/
+dev-alice/
+dev-bob/
 repo.git/
 
