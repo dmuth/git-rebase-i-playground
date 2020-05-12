@@ -50,6 +50,7 @@ Once that you have the repos set up, here are some sample exercises to try (answ
 - Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `07-seventh and 08-eight`, push to `origin`
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
+- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
 
 
 ## Hints
@@ -68,6 +69,8 @@ Here are some hints to lead you in the right direction but without fully giving 
    - *There's more than one way to do this*
 - Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
+- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
+   - *The commit wasn't technically deleted...*
 
 
 ## Troubleshooting
@@ -140,6 +143,14 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - That's it, you're done!
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
+- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
+   - Use `git reflog` to find the commit you removed from `master`.
+   - `git show COMMIT_ID` can be used to confirm it's the commit you want.
+   - `git merge COMMIT_ID` will merge that commit back into `master`
+   - Extra Credit: Use `git rebase -i HEAD~9` to move the commit back to its original location
+   - There are a few other ways as well.  Feel free to play around in Git, that's what this repo is for!
+   
+
 If the commit history for any of the above look "weird" when you're done, that's because you're rewriting history, so yeah.  The tool <a href="https://github.com/jonas/tig">tig</a> can make the history a little
 clearer to read.
 
@@ -158,6 +169,14 @@ A: Alice and Bob are used as placeholder names in cryptology, science, and engin
 - https://git-scm.com/docs/git-rebase
 - https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 - https://www.dmuth.org/howto-safely-use-git-rebase-i/ - My blog post on this topic
+- http://gitready.com/advanced/2009/01/17/restoring-lost-commits.html
+- http://effectif.com/git/recovering-lost-git-commits
+- http://gitready.com/intermediate/2009/02/09/reflog-your-safety-net.html
+
+
+## TODO
+
+- I want to make some simple/slides graphs that show the state of the Git tree for some of the exercises
 
 
 ## Contact
