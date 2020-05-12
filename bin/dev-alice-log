@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Show Alice's commit log
+#
+
+# Errors are fatal
+set -e
+
+pushd $(dirname $0)/../dev-alice > /dev/null
+git log --pretty=oneline
+
+
