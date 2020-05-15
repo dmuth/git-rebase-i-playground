@@ -20,6 +20,11 @@ This will create the following repo and directories, each with about a dozen com
 
 NOTE: Running `init.sh` will remove those directories if they already exist.  This is so that you can have a "clean slate" every time you run the script.
 
+The tree looks like this:
+
+<img src="./img/master.png" width="600" />
+
+
 
 ## Why would you want to use `git rebase -i`?
 
@@ -44,32 +49,32 @@ the server's repo, and in your repo.  It will make the commit history just sligh
 
 Once that you have the repos set up, here are some sample exercises to try (answers below):
 
-- Switch the order of commits `07-seventh` and `08-eight`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`
+- Switch the order of commits `04-fourth` and `05-fifth`
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
 - Squash the two commits in `branch1` then push to `origin`
-- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
-- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
+- Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
+- Run `git rebase -i` and delete commit `05-fifth`.  Then recover it.
 
 
 ## Hints
 
 Here are some hints to lead you in the right direction but without fully giving away the solution
 
-- Switch the order of commits `07-seventh` and `08-eight`
+- Switch the order of commits `04-fourth` and `05-fifth`
    - *Make sure you are going far enough back in the revision history...*
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
    - *You're going to have to resolve that merge conflict...*
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - *You'll need to remove some commits...*
 - Squash the two commits in `branch1` then push to `origin`
    - *You'll need to overwrite what's already there...*
-- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
+- Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
    - *There's more than one way to do this*
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
-- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
+- Run `git rebase -i` and delete commit `05-fifth`.  Then recover it.
    - *The commit wasn't technically deleted...*
 
 
@@ -86,11 +91,11 @@ If things go wrong, here are some suggestions:
 
 Solutions to the above exercises, all done in the `dev-alice/` directory:
 
-- Switch the order of commits `07-seventh` and `08-eight`
-   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file. You're done!
+- Switch the order of commits `04-fourth` and `05-fifth`
+   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file. You're done!
 
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict` in the `master` branch
-   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
+   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
    - Edit `file.txt` and resolve the conflicts
    - `git add file.txt`
       - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
@@ -105,7 +110,7 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - No more conflicts, so that's it, you're done! Verify with `git log`.
 
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
-   - Start with `git rebase -i HEAD~11`, remove the two commits from `branch1`, save the file
+   - Start with `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
    - `git checkout master`
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
@@ -116,8 +121,8 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - Push with `git push --force-with-lease`
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline branch1`
 
-- Switch the order of commits `07-seventh and 08-eight`, push to `origin`
-   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
+- Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
+   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
    - There are two ways to do this:
       - `git pull && git push`
          - This is the preferred way, and will cause your (re-written) history to be merged in with what's in `origin`.
@@ -126,8 +131,8 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
          - The difference between `--force-with-lease` versus `--force` is that the latter will overwrite the remote with your changes.  `--force-with-lease` requires that you have the most recent commit (the HEAD) from the remote, to ensure that you don't overwrite changes which were checked in since your last `pull`.  This makes it safer, or at least less unsafe.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
-- Switch the order of commits `03-third-will-conflict` and `04-fourth-will-conflict`, THEN push to `origin`
-   - Start with `git rebase -i HEAD~9`, switch the lines with those two commits, then save the file.
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
+   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
    - Edit `file.txt` and resolve the conflicts
    - `git add file.txt`
       - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
@@ -143,11 +148,11 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - That's it, you're done!
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
-- Run `git rebase -i` and delete commit `07-seventh`.  Then recover it.
+- Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
    - Use `git reflog` to find the commit you removed from `master`.
    - `git show COMMIT_ID` can be used to confirm it's the commit you want.
    - `git merge COMMIT_ID` will merge that commit back into `master`
-   - Extra Credit: Use `git rebase -i HEAD~9` to move the commit back to its original location
+   - *Extra Credit*: Use `git rebase -i HEAD~5` to move the commit back to its original location
    - There are a few other ways as well.  Feel free to play around in Git, that's what this repo is for!
    
 

@@ -26,35 +26,47 @@ pushd $DEV1 > /dev/null
 
 git init
 
-touch $FILE
-git add $FILE
-git commit -m "Initial checkin" 
+touch .initial-checkin
+git add .initial-checkin
+git commit -m "Initial Checkin"
+
 
 #
-# Add 4 checkins of a new file and a line in the text file.
-# This guarantees a conflict when rebasing any of these commits.
+# Write a commit that will conflict
 #
-for LINE in 01-first 02-second 03-third 04-fourth 
-do
-	LINE="${LINE}-will-conflict"
+function commit_will_conflict() {
+
+	LINE="${1}-will-conflict"
+
 	echo $LINE >> $FILE
 	echo $LINE >> ${LINE}.txt
+
 	git add ${FILE} ${LINE}.txt
 	git commit -m "${LINE}" > /dev/null
-done
+
+} # End of commit_will_conflict()
 
 
 #
-# Create 5 more checkins that *won't* cause conflicts.
+# Write a commit that won't conflict.
 #
-for LINE in 05-fifth 06-sixth 07-seventh 08-eighth 09-ninth
-do
+function commit() {
+
+	LINE=$1
+
 	echo $LINE >> ${LINE}.txt
 	git add ${FILE} ${LINE}.txt
 	git commit -m "${LINE}" > /dev/null
-done
 
-#git log --pretty=oneline # Debugging
+}
+
+
+commit_will_conflict 01-first
+commit_will_conflict 02-second
+
+commit 03-third
+commit 04-fourth
+
 popd > /dev/null
 
 echo "# "
@@ -92,33 +104,30 @@ echo "# "
 echo "# Creating ${BRANCH1}..."
 echo "# "
 git checkout -b $BRANCH1
-for LINE in 10-branch1 11-branch1
-do
-	echo $LINE >> ${LINE}.txt
-	git add ${FILE} ${LINE}.txt
-	git commit -m "${LINE}" > /dev/null
-	git push --set-upstream origin branch1
-done
+
+commit 10-branch1
+commit 11-branch1
+git push --set-upstream origin branch1
 
 echo "# "
 echo "# Creating ${BRANCH2} off of ${BRANCH1}..."
 echo "# "
 git checkout -b $BRANCH2
-for LINE in 20-branch2 21-branch2
-do
-	echo $LINE >> ${LINE}.txt
-	git add ${FILE} ${LINE}.txt
-	git commit -m "${LINE}" > /dev/null
-done
+
+commit 20-branch2
+commit 21-branch2
 
 git checkout master
+
+commit 05-fifth
+git push
 
 echo "# "
 echo "# All done!"
 echo "# "
 echo "# The repo in ${DEV1} is currently two branches deep, and the commit log for master looks like this:"
 echo "# "
-git log --pretty=oneline # Debugging
+git log --pretty=oneline --graph --all
 
 echo "# "
 echo "# Don't forget about branch1 and branch2!"
@@ -129,12 +138,13 @@ echo "# cd ${DEV1}/"
 echo "# "
 echo "# Some exercises to try with git rebase -i, in increasing difficulty:  "
 echo "# "
-echo "# - Switch the order of commits 07-seventh and 08-eight"
-echo "# - Switch the order of commits 03-third-will-conflict and 04-fourth-will-conflict"
-echo "# - Merge the changes of ${BRANCH2} into master but NOT the changes of ${BRANCH1}"
+echo "# - Switch the order of commits 04-fourth and 05-fifth"
+echo "# - Switch the order of commits 01-first-will-conflict and 02-second-will-conflict"
+echo "# - Merge the changes of branch2 into master but NOT the changes of branch1"
 echo "# - Squash the two commits in branch1 then push to origin"
-echo "# - Switch the order of commits 07-seventh and 08-eight, THEN push to origin"
-echo "# - Switch the order of commits 03-third-will-conflict and 04-fourth-will-conflict, THEN push to origin"
+echo "# - Switch the order of commits 04-fourth and 05-fifth, push to origin"
+echo "# - Switch the order of commits 01-first-will-conflict and 02-second-will-conflict, THEN push to origin"
+echo "# - Run git rebase -i and delete commit 05-fifth.  Then recover it."
 echo "# "
 echo "# "
 
