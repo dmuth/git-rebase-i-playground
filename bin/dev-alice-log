@@ -7,6 +7,6 @@
 set -e
 
 pushd $(dirname $0)/../dev-alice > /dev/null
-git log --pretty=oneline
+git log --pretty=oneline --graph --all
 
 
