@@ -93,6 +93,9 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
 
 - Switch the order of commits `04-fourth` and `05-fifth`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file. You're done!
+   - Graphs:
+      - <a href="img/01-Switch 04 and 05.png">After switching 04 and 05</a>
+      - <a href="img/02-Switch 04 and 05 Merged.png">After merging in branch2</a>
 
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
@@ -108,18 +111,26 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - `git commit`
    - `git rebase --continue`
    - No more conflicts, so that's it, you're done! Verify with `git log`.
+   - Graphs:
+      - <a href="img/03-Switch 01 and 02.png">Switched 01 and 02</a>
+      - <a href="img/04-Switch 01 and 02 Merged.png">After merging in branch2</a>
 
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - Start with `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
    - `git checkout master`
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
+   - Graphs:
+      - <a href="img/05-Merge just branch2.png">During the middle of rebasing</a>
+      - <a href="img/06-Merge just branch2 Merged.png">After merging just branch2</a>
 
 - Squash the two commits in `branch1` then push to `origin`
    - Check out the branch: `git checkout branch1`
    - Rebase the branch and squash the final commit into the previous one, so `branch1` only has one commit.
    - Push with `git push --force-with-lease`
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline branch1`
+   - Graphs:
+      - <a href="img/07-Squash Branch1 Commits.png">Branch1 after both commits have been squashed</a>
 
 - Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
@@ -130,6 +141,9 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
          - This will overwrite what's in `origin` and is only recommended if you are in a branch that only you work on.
          - The difference between `--force-with-lease` versus `--force` is that the latter will overwrite the remote with your changes.  `--force-with-lease` requires that you have the most recent commit (the HEAD) from the remote, to ensure that you don't overwrite changes which were checked in since your last `pull`.  This makes it safer, or at least less unsafe.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
+   - Graphs:
+      - <a href="img/08-Delete 04.png">After 04 has been deleted (removed from master)</a>
+      - <a href="img/09-Delete 04 and Merged It Back.png">After 04 has been merged back in to master</a>
 
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
