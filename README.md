@@ -22,7 +22,7 @@ NOTE: Running `init.sh` will remove those directories if they already exist.  Th
 
 The tree looks like this:
 
-<img src="./img/master.png" width="600" />
+<img src="./img/00-START.png" width="600" />
 
 
 
