@@ -12,23 +12,19 @@ FILE="file.txt"
 BRANCH1="branch1"
 BRANCH2="branch2"
 
-echo "# "
 echo "# Cleaning up any past installs..."
-echo "# "
 rm -rfv $DEV1 $DEV2 $REPO > /dev/null
 
-echo "# "
 echo "# Creating initial copy of archive in ${DEV1}..."
-echo "# "
 mkdir -p $DEV1
 
 pushd $DEV1 > /dev/null
 
-git init
+git init >/dev/null
 
 touch .initial-checkin
 git add .initial-checkin
-git commit -m "Initial Checkin"
+git commit -m "Initial Checkin" >/dev/null 2>/dev/null
 
 
 #
@@ -69,68 +65,54 @@ commit 04-fourth
 
 popd > /dev/null
 
-echo "# "
 echo "# Cloning bare repo to ${REPO}..."
-echo "# "
-git clone --bare $DEV1 $REPO
+git clone --bare $DEV1 $REPO >/dev/null 2>/dev/null
 
 pushd $REPO > /dev/null
 git remote remove origin
 
 popd > /dev/null
 
-echo "# "
 echo "# Fixing origin in ${DEV1}..."
-echo "# "
 pushd $DEV1 > /dev/null
 
-git remote add origin ../${REPO}
-git fetch
-git branch --set-upstream-to=origin/master master
+git remote add origin ../${REPO} >/dev/null 2>/dev/null
+git fetch >/dev/null 2>/dev/null
+git branch --set-upstream-to=origin/master master >/dev/null 2>/dev/null
 
 popd >/dev/null
 
-echo "# "
 echo "# Cloning to ${DEV2}..."
-echo "# "
 
-git clone ${REPO} ${DEV2}
+git clone ${REPO} ${DEV2} >/dev/null 2>/dev/null
 
 echo "# Switching back to ${DEV1}..."
 pushd $DEV1 > /dev/null
 
 
-echo "# "
 echo "# Creating ${BRANCH1}..."
-echo "# "
-git checkout -b $BRANCH1
+git checkout -b $BRANCH1 >/dev/null 2>/dev/null
 
 commit 10-branch1
 commit 11-branch1
-git push --set-upstream origin branch1
+git push --set-upstream origin branch1 >/dev/null 2>/dev/null
 
-echo "# "
 echo "# Creating ${BRANCH2} off of ${BRANCH1}..."
-echo "# "
-git checkout -b $BRANCH2
+git checkout -b $BRANCH2 2>/dev/null
 
 commit 20-branch2
 commit 21-branch2
 
-git checkout master
+git checkout master >/dev/null 2>/dev/null
 
 commit 05-fifth
-git push
+git push 2>/dev/null
 
-echo "# "
-echo "# All done!"
 echo "# "
 echo "# The repo in ${DEV1} is currently two branches deep, and the commit log for master looks like this:"
 echo "# "
 git log --pretty=oneline --graph --all
 
-echo "# "
-echo "# Don't forget about branch1 and branch2!"
 echo "# "
 echo "# To get started, drop into that directory with:"
 echo "# "
@@ -146,9 +128,6 @@ echo "# - Switch the order of commits 04-fourth and 05-fifth, push to origin"
 echo "# - Switch the order of commits 01-first-will-conflict and 02-second-will-conflict, THEN push to origin"
 echo "# - Run git rebase -i and delete commit 05-fifth.  Then recover it."
 echo "# "
-echo "# "
-
-
 
 
 
