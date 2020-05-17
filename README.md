@@ -55,7 +55,7 @@ Once that you have the repos set up, here are some sample exercises to try (answ
 - Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
-- Run `git rebase -i` and delete commit `05-fifth`.  Then recover it.
+- Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
 
 
 ## Hints
@@ -74,7 +74,7 @@ Here are some hints to lead you in the right direction but without fully giving 
    - *There's more than one way to do this*
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
-- Run `git rebase -i` and delete commit `05-fifth`.  Then recover it.
+- Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
    - *The commit wasn't technically deleted...*
 
 
