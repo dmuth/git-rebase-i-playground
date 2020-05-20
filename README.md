@@ -50,12 +50,12 @@ the server's repo, and in your repo.  It will make the commit history just sligh
 Once that you have the repos set up, here are some sample exercises to try (answers below):
 
 - Switch the order of commits `04-fourth` and `05-fifth`
-- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
 - Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
 - Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
 
 
 ## Hints
@@ -64,8 +64,6 @@ Here are some hints to lead you in the right direction but without fully giving 
 
 - Switch the order of commits `04-fourth` and `05-fifth`
    - *Make sure you are going far enough back in the revision history...*
-- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
-   - *You're going to have to resolve that merge conflict...*
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - *You'll need to remove some commits...*
 - Squash the two commits in `branch1` then push to `origin`
@@ -76,6 +74,8 @@ Here are some hints to lead you in the right direction but without fully giving 
    - *You'll need to handle a merge conflict AND overwrite history in the origin...*
 - Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
    - *The commit wasn't technically deleted...*
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
+   - *You're going to have to resolve that merge conflict...*
 
 
 ## Troubleshooting
@@ -96,24 +96,6 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - Graphs:
       - <a href="img/01-Switch 04 and 05.png">After switching 04 and 05</a>
       - <a href="img/02-Switch 04 and 05 Merged.png">After merging in branch2</a>
-
-- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
-   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
-   - Edit `file.txt` and resolve the conflicts
-   - `git add file.txt`
-      - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
-   - `git commit`
-   - Running `git status` tells you that you're not done yet, and tells you what to do next:
-   - `git rebase --continue`
-   - Uh oh, we have another conflict because the next commit also changes `file.txt`.
-   - Edit `file.txt` and resolve the conflicts
-   - `git add file.txt`
-   - `git commit`
-   - `git rebase --continue`
-   - No more conflicts, so that's it, you're done! Verify with `git log`.
-   - Graphs:
-      - <a href="img/03-Switch 01 and 02.png">Switched 01 and 02</a>
-      - <a href="img/04-Switch 01 and 02 Merged.png">After merging in branch2</a>
 
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
    - Start with `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
@@ -169,6 +151,24 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - *Extra Credit*: Use `git rebase -i HEAD~5` to move the commit back to its original location
    - There are a few other ways as well.  Feel free to play around in Git, that's what this repo is for!
    
+- Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`
+   - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
+   - Edit `file.txt` and resolve the conflicts
+   - `git add file.txt`
+      - Note that `git log` will show a VERY incomplete history at this point. That's fine--you traveled back in time.
+   - `git commit`
+   - Running `git status` tells you that you're not done yet, and tells you what to do next:
+   - `git rebase --continue`
+   - Uh oh, we have another conflict because the next commit also changes `file.txt`.
+   - Edit `file.txt` and resolve the conflicts
+   - `git add file.txt`
+   - `git commit`
+   - `git rebase --continue`
+   - No more conflicts, so that's it, you're done! Verify with `git log`.
+   - Graphs:
+      - <a href="img/10-Switch 01 and 02.png">Switched 01 and 02</a>
+      - <a href="img/11-Switch 01 and 02 Merged.png">After merging in branch2</a>
+
 
 If the commit history for any of the above look "weird" when you're done, that's because you're rewriting history, so yeah.  The tool <a href="https://github.com/jonas/tig">tig</a> can make the history a little
 clearer to read.
