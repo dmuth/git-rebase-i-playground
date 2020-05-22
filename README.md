@@ -98,7 +98,8 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
       - <a href="img/02-Switch 04 and 05 Merged.png">After merging in branch2</a>
 
 - Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
-   - Start with `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
+   - Start in `branch2` with `git checkout branch2`
+   - Now do `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
    - `git checkout master`
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
