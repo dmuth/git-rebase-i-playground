@@ -34,10 +34,10 @@ function commit_will_conflict() {
 
 	LINE="${1}-will-conflict"
 
-	echo $LINE >> $FILE
-	echo $LINE >> ${LINE}.txt
+	echo "${LINE}" >> $FILE
+	echo "${LINE}" >> "${LINE}.txt"
 
-	git add ${FILE} ${LINE}.txt
+	git add ${FILE} "${LINE}.txt"
 	git commit -m "${LINE}" > /dev/null
 
 } # End of commit_will_conflict()
@@ -50,8 +50,8 @@ function commit() {
 
 	LINE=$1
 
-	echo $LINE >> ${LINE}.txt
-	git add ${FILE} ${LINE}.txt
+	echo "${LINE}" >> "${LINE}.txt"
+	git add "${FILE}" "${LINE}.txt"
 	git commit -m "${LINE}" > /dev/null
 
 }
