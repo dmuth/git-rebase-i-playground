@@ -8,3 +8,7 @@ dev-alice/
 dev-bob/
 repo.git/
 
+# Steve Jobs
+.DS_Store
+
+
