@@ -82,8 +82,11 @@ Here are some hints to lead you in the right direction but without fully giving 
 
 If things go wrong, here are some suggestions:
 
+- First, the nuclear option: `./init.sh` - This will reset your Git repo to the initial state.  Useful for if you've gone down a hole and you just want to start over.
 - Running `git status` at any time will not harm you, and will provide you with some useful info and what you need to do next.
 - `git rebase --abort` will back out of the current rebase.
+- `git log --pretty=oneline --graph` - Will print a listing of commits in the current branch.
+- `git log --pretty=oneline --graph --all` - Will print a listing of commits across all branches, and show which branches are based on what commits.
 - The `tig` tool available at https://github.com/jonas/tig is super useful for browsing the commit history of a branch
 
 
