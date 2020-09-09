@@ -14,8 +14,8 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 - `./init.sh`
 
 This will create the following repo and directories, each with about a dozen commits:
-- `dev-alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from master while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
-- `dev-bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `master`.
+- `dev-alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from main while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
+- `dev-bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `main`.
 - `repo.git` - A "bare" clone of the repo.  Note that if you `cd` to this directory, commands like `git log --pretty=oneline` will work just fine. That is useful for debugging.
 
 NOTE: Running `init.sh` will remove those directories if they already exist.  This is so that you can have a "clean slate" every time you run the script.
@@ -50,7 +50,7 @@ the server's repo, and in your repo.  It will make the commit history just sligh
 Once that you have the repos set up, here are some sample exercises to try (answers below):
 
 - Switch the order of commits `04-fourth` and `05-fifth`
-- Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
+- Merge the changes of `branch2` into `main` but NOT the changes of `branch1`
 - Squash the two commits in `branch1` then push to `origin`
 - Switch the order of commits `04-fourth and 05-fifth`, push to `origin`
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
@@ -64,7 +64,7 @@ Here are some hints to lead you in the right direction but without fully giving 
 
 - Switch the order of commits `04-fourth` and `05-fifth`
    - *Make sure you are going far enough back in the revision history...*
-- Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
+- Merge the changes of `branch2` into `main` but NOT the changes of `branch1`
    - *You'll need to remove some commits...*
 - Squash the two commits in `branch1` then push to `origin`
    - *You'll need to overwrite what's already there...*
@@ -100,10 +100,10 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
       - <a href="img/01-Switch 04 and 05.png">After switching 04 and 05</a>
       - <a href="img/02-Switch 04 and 05 Merged.png">After merging in branch2</a>
 
-- Merge the changes of `branch2` into `master` but NOT the changes of `branch1`
+- Merge the changes of `branch2` into `main` but NOT the changes of `branch1`
    - Start in `branch2` with `git checkout branch2`
    - Now do `git rebase -i HEAD~8`, remove the two commits from `branch1`, save the file
-   - `git checkout master`
+   - `git checkout main`
    - `git merge branch2`
    - That's it, you're done!  Verify with `git log --pretty=oneline`.
    - Graphs:
@@ -128,8 +128,8 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
          - The difference between `--force-with-lease` versus `--force` is that the latter will overwrite the remote with your changes.  `--force-with-lease` requires that you have the most recent commit (the HEAD) from the remote, to ensure that you don't overwrite changes which were checked in since your last `pull`.  This makes it safer, or at least less unsafe.
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
    - Graphs:
-      - <a href="img/08-Delete 04.png">After 04 has been deleted (removed from master)</a>
-      - <a href="img/09-Delete 04 and Merged It Back.png">After 04 has been merged back in to master</a>
+      - <a href="img/08-Delete 04.png">After 04 has been deleted (removed from main)</a>
+      - <a href="img/09-Delete 04 and Merged It Back.png">After 04 has been merged back in to main</a>
 
 - Switch the order of commits `01-first-will-conflict` and `02-second-will-conflict`, THEN push to `origin`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file.
@@ -144,14 +144,14 @@ Solutions to the above exercises, all done in the `dev-alice/` directory:
    - `git add file.txt`
    - `git commit`
    - `git rebase --continue`
-   - At this point, you've now merged your changes into master, let's push them with `git push origin`.
+   - At this point, you've now merged your changes into main, let's push them with `git push origin`.
    - That's it, you're done!
    - Verify by changing into `../repo.git` and running `git log --pretty=oneline`
 
 - Run `git rebase -i` and delete commit `04-fourth`.  Then recover it.
-   - Use `git reflog` to find the commit you removed from `master`.
+   - Use `git reflog` to find the commit you removed from `main`.
    - `git show COMMIT_ID` can be used to confirm it's the commit you want.
-   - `git merge COMMIT_ID` will merge that commit back into `master`
+   - `git merge COMMIT_ID` will merge that commit back into `main`
    - *Extra Credit*: Use `git rebase -i HEAD~5` to move the commit back to its original location
    - There are a few other ways as well.  Feel free to play around in Git, that's what this repo is for!
    

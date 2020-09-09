@@ -70,15 +70,17 @@ git clone --bare $DEV1 $REPO >/dev/null 2>/dev/null
 
 pushd $REPO > /dev/null
 git remote remove origin
+git branch -m master main
 
 popd > /dev/null
 
 echo "# Fixing origin in ${DEV1}..."
 pushd $DEV1 > /dev/null
 
+git branch -m master main
 git remote add origin ../${REPO} >/dev/null 2>/dev/null
 git fetch >/dev/null 2>/dev/null
-git branch --set-upstream-to=origin/master master >/dev/null 2>/dev/null
+git branch --set-upstream-to=origin/main main >/dev/null 2>/dev/null
 
 popd >/dev/null
 
@@ -103,13 +105,13 @@ git checkout -b $BRANCH2 2>/dev/null
 commit 20-branch2
 commit 21-branch2
 
-git checkout master >/dev/null 2>/dev/null
+git checkout main >/dev/null 2>/dev/null
 
 commit 05-fifth
 git push 2>/dev/null
 
 echo "# "
-echo "# The repo in ${DEV1} is currently two branches deep, and the commit log for master looks like this:"
+echo "# The repo in ${DEV1} is currently two branches deep, and the commit log for main looks like this:"
 echo "# "
 git log --pretty=oneline --graph --all
 
@@ -122,7 +124,7 @@ echo "# Some exercises to try with git rebase -i, in increasing difficulty:  "
 echo "# "
 echo "# - Switch the order of commits 04-fourth and 05-fifth"
 echo "# - Switch the order of commits 01-first-will-conflict and 02-second-will-conflict"
-echo "# - Merge the changes of branch2 into master but NOT the changes of branch1"
+echo "# - Merge the changes of branch2 into main but NOT the changes of branch1"
 echo "# - Squash the two commits in branch1 then push to origin"
 echo "# - Switch the order of commits 04-fourth and 05-fifth, push to origin"
 echo "# - Switch the order of commits 01-first-will-conflict and 02-second-will-conflict, THEN push to origin"
