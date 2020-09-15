@@ -1,5 +1,6 @@
 
 # Learn "git rebase -i" with this lab/playground
+<img src="./img/git.png" width="200" align="right" />
 
 Want to learn how to **properly** use `git rebase -i` (also known as an interactive rebase) without putting your production
 repo at risk?  You're in the right place!  The script included in this repo will create
