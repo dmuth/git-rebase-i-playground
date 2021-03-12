@@ -13,10 +13,12 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 - Clone this repo: `git clone git@github.com:dmuth/git-rebase-i-playground.git`
 - `cd git-rebase-i-playground`
 - `./init.sh`
+- `./git-config.sh`
+  - Run this to set the following aliases: `st`, `ci`, `co`, and `lg`.  These will make for less typing and easier viewing of logs.
 
 This will create the following repo and directories, each with about a dozen commits:
-- `dev-alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from main while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
-- `dev-bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `main`.
+- `dev-1alice` - A clone of the repo made by "Alice", with two branches: `branch1` and `branch2`.  `branch1` is a branch from main while `branch2` is based on `branch1`.  That is by design (and is based on a True Story, heh).
+- `dev-2bob`- A clone of the repo made by Alice's co-worker "Bob", only containing `main`.
 - `repo.git` - A "bare" clone of the repo.  Note that if you `cd` to this directory, commands like `git log --pretty=oneline` will work just fine. That is useful for debugging.
 
 NOTE: Running `init.sh` will remove those directories if they already exist.  This is so that you can have a "clean slate" every time you run the script.
@@ -48,7 +50,7 @@ the server's repo, and in your repo.  It will make the commit history just sligh
 
 ## Exercises
 
-Once that you have the repos set up, here are some sample exercises to try (answers below):
+Once that you have the repos set up, here are some sample exercises to try (answers below) in `dev1-alice`:
 
 - Switch the order of commits `04-fourth` and `05-fifth`
 - Merge the changes of `branch2` into `main` but NOT the changes of `branch1`
@@ -93,7 +95,7 @@ If things go wrong, here are some suggestions:
 
 ## Solutions
 
-Solutions to the above exercises, all done in the `dev-alice/` directory:
+Solutions to the above exercises, all done in the `dev-1alice/` directory:
 
 - Switch the order of commits `04-fourth` and `05-fifth`
    - Start with `git rebase -i HEAD~5`, switch the lines with those two commits, then save the file. You're done!
