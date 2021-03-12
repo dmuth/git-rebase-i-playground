@@ -139,7 +139,7 @@ git log --pretty=oneline --graph --all
 echo "# "
 echo "# To get started, drop into that directory with:"
 echo "# "
-echo "# cd ${DEV1}/"
+echo "# cd ${TARGET}/${DEV1}/"
 echo "# "
 echo "# Some exercises to try with git rebase -i, in increasing difficulty:  "
 echo "# "
