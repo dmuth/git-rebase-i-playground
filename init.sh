@@ -12,6 +12,19 @@ FILE="file.txt"
 BRANCH1="branch1"
 BRANCH2="branch2"
 
+THIS_DIR=$(basename $(pwd))
+
+if test "${THIS_DIR}" == "${DEV1}" \
+	-o "${THIS_DIR}" == "${DEV2}" \
+	-o "${THIS_DIR}" == "${REPO}"
+then
+	echo "! "
+	echo "! Current directory is ${THIS_DIR}, which will be removed!  "
+	echo "! Please go to the parent directory before running this script."
+	echo "! "
+	exit 1
+fi
+
 echo "# Cleaning up any past installs..."
 rm -rfv $DEV1 $DEV2 $REPO > /dev/null
 
