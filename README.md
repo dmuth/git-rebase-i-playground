@@ -12,7 +12,8 @@ for an ideal testing ground to experiment with `git rebase -i` without going ins
 
 - Clone this repo: `git clone git@github.com:dmuth/git-rebase-i-playground.git`
 - `cd git-rebase-i-playground`
-- `./init.sh`
+- `./init.sh` - Stand up a set of Git repos with some nested branches
+- `./init-with-feature-branches.sh` - Stand up a set of Git repos with multiple feature branches
 - `./git-config.sh`
   - Run this to set the following aliases: `st`, `ci`, `co`, and `lg`.  These will make for less typing and easier viewing of logs.
 
