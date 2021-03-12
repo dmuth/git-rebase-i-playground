@@ -5,8 +5,8 @@
 
 set -e
 
-DEV1="dev-alice"
-DEV2="dev-bob"
+DEV1="dev1-alice"
+DEV2="dev2-bob"
 REPO="repo.git"
 FILE="file.txt"
 BRANCH1="branch1"

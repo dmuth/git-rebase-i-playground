@@ -4,8 +4,8 @@
 *.swp
 
 # Ignore our repos
-dev-alice/
-dev-bob/
+dev1-alice/
+dev2-bob/
 repo.git/
 
 # Steve Jobs
