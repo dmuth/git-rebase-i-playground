@@ -44,8 +44,10 @@ pushd $DEV1 > /dev/null
 git init >/dev/null
 
 touch .initial-checkin
+touch $FILE
 git add .initial-checkin
-git commit -m "Initial Checkin" >/dev/null 2>/dev/null
+git add $FILE
+git commit -m "Initial Checkin. Create empty $FILE" >/dev/null 2>/dev/null
 
 
 #
